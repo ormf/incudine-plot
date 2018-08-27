@@ -1,4 +1,4 @@
-* cl-plot
+* incudine-plot
 ** License
 
 #+BEGIN_SRC
@@ -27,7 +27,11 @@ As it is based on [[https://github.com/ormf/cl-plot][cl-plot]] it can also be us
 sequences.
 
 ** INSTALLATION
-   incudine-plot depends on incudine, cl-plot and uiop. 
+   incudine-plot depends on incudine, cl-plot and uiop. Like cl-plot
+   the #'plot function returns its argument unchanged. This enables to
+   wrap the (plot ...) around suitable subexpressions within code to
+   graphically monitor intermediate results of larger code blocks
+   without changing the outcome of the code.
 
    The recommended way is to use quicklisp and put the incudine-plot folder
    into <home>/quicklisp/local-projects/.

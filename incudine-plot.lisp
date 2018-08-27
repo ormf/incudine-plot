@@ -39,7 +39,8 @@
         (loop for idx below 100
            do (format out "~a ~a~%"
                       (/ (* env-dur idx) 100)
-                      (float (buffer-value env-buffer idx) 1.0)))))))
+                      (float (buffer-value env-buffer idx) 1.0))))))
+    (values obj))
 #|
    Example:
 
@@ -78,7 +79,8 @@
               (:seconds
                (format out "~,4f ~,4f~%"
                        (/ idx incudine::*sample-rate*)
-                       (float (buffer-value buffer idx) 1.0))))))))
+                       (float (buffer-value buffer idx) 1.0)))))))
+  (values buffer))
 
 #|
    Example:

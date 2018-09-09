@@ -27,7 +27,7 @@
                                              (num-values 1000))
   "Plot input data given as an incudine envelope."
   (declare (ignore region header options grid))
-    (with-gnuplot-instance (out args)
+    (with-gnuplot-instance (out . args)
       (let* ((env-dur (envelope-duration obj))
              (env-buffer (make-buffer num-values)))
         (incudine::bounce-to-buffer (env-buffer :frames num-values :sample-rate num-values)
@@ -58,7 +58,7 @@
           (case x-axis
             (:samples region)
             (:seconds (mapcar (lambda (x) (/ x incudine::*sample-rate*)) region))))
-    (with-gnuplot-instance (out args)
+    (with-gnuplot-instance (out . args)
       (let* ((start (first region))
              (dur (- (second region) start)))
         (loop for plot-idx below num-values

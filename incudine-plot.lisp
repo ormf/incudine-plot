@@ -23,17 +23,18 @@
 (dsp! play-envelope ((env incudine::envelope) timescale)
   (out (envelope env :time-scale timescale)))
 
-(defmethod plot ((obj envelope) &rest args &key region (header *gnuplot-header*) (options *gnuplot-options*) (grid t))
+(defmethod plot ((obj envelope) &rest args &key region (header *gnuplot-header*) (options *gnuplot-options*) (grid t)
+                                             (num-values 1000))
   "Plot input data given as an incudine envelope."
   (declare (ignore region header options grid))
     (with-gnuplot-instance (out args)
       (let* ((env-dur (envelope-duration obj))
-             (env-buffer (make-buffer 100)))
-        (incudine::bounce-to-buffer (env-buffer :frames 100 :sample-rate 100)
+             (env-buffer (make-buffer num-values)))
+        (incudine::bounce-to-buffer (env-buffer :frames num-values :sample-rate num-values)
           (play-envelope obj (/ env-dur)))
-        (loop for idx below 100
+        (loop for idx below num-values
            do (format out "~a ~a~%"
-                      (/ (* env-dur idx) 100)
+                      (/ (* env-dur idx) (1- num-values))
                       (float (buffer-value env-buffer idx) 1.0)))))
     (values obj))
 #|

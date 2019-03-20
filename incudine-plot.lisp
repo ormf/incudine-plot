@@ -20,12 +20,7 @@
 
 (in-package :incudine-plot)
 
-(dsp! play-envelope ((env incudine::envelope) timescale)
-  (out (envelope env :time-scale timescale)))
-
-(defmethod plot ((obj envelope) &rest args &key region (header *gnuplot-header*) (options *gnuplot-options*) (grid t)
-                                             (num-values 1000))
-  "Plot input data given as an incudine envelope."
+(defmethod plot ((obj envelope) &rest args &key region (header *gnuplot-header*) (options *gnuplot-options*) (grid t) (num-values 1000)) "Plot input data given as an incudine envelope."
   (declare (ignore region header options grid))
     (with-gnuplot-instance (out . args)
       (let* ((env-dur (envelope-duration obj))
